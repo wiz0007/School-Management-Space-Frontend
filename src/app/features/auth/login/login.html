@@ -1,0 +1,60 @@
+<main class="auth-page">
+  <section class="auth-visual" aria-label="School management platform">
+    <a class="brand" routerLink="/login" aria-label="School Management home">
+      <span class="brand__mark">S</span>
+      <span>
+        <strong>SchoolSys</strong>
+        <small>Secure campus management</small>
+      </span>
+    </a>
+
+    <div class="auth-visual__content">
+      <span class="eyebrow">Welcome back</span>
+      <h1>Manage your school with clarity, control, and confidence.</h1>
+      <p>Access admissions, attendance, staff, classes, finance, and parent communication from one protected workspace.</p>
+    </div>
+
+    <div class="auth-stats" aria-label="Platform highlights">
+      <span>Role-based access</span>
+      <span>Protected student data</span>
+      <span>Fast daily workflows</span>
+    </div>
+  </section>
+
+  <section class="auth-panel" aria-labelledby="login-title">
+    <div class="auth-card">
+      <div class="auth-card__header">
+        <span class="eyebrow">Login</span>
+        <h2 id="login-title">Sign in to your account</h2>
+        <p>Use your registered email and password to continue.</p>
+      </div>
+
+      <form class="auth-form">
+        <label class="field">
+          <span>Email address</span>
+          <input type="email" name="email" autocomplete="email" placeholder="admin@school.edu" required>
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <input type="password" name="password" autocomplete="current-password" placeholder="Enter password" required>
+        </label>
+
+        <div class="form-row">
+          <label class="check-field">
+            <input type="checkbox" name="remember">
+            <span>Remember me</span>
+          </label>
+          <a class="inline-link" href="#">Forgot password?</a>
+        </div>
+
+        <button class="primary-action auth-submit" type="submit">Sign in</button>
+      </form>
+
+      <p class="auth-switch">
+        New to SchoolSys?
+        <a routerLink="/register">Create an account</a>
+      </p>
+    </div>
+  </section>
+</main>

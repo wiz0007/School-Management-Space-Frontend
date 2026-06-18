@@ -1,0 +1,67 @@
+<main class="auth-page">
+  <section class="auth-visual" aria-label="School management platform">
+    <a class="brand" routerLink="/login" aria-label="School Management home">
+      <span class="brand__mark">S</span>
+      <span>
+        <strong>SchoolSys</strong>
+        <small>Secure campus management</small>
+      </span>
+    </a>
+
+    <div class="auth-visual__content">
+      <span class="eyebrow">Get started</span>
+      <h1>Create a protected workspace for your school.</h1>
+      <p>Set up the first administrator account and prepare your institution for secure digital operations.</p>
+    </div>
+
+    <div class="auth-stats" aria-label="Platform highlights">
+      <span>Admin onboarding</span>
+      <span>Secure by default</span>
+      <span>Scales with your campus</span>
+    </div>
+  </section>
+
+  <section class="auth-panel" aria-labelledby="register-title">
+    <div class="auth-card">
+      <div class="auth-card__header">
+        <span class="eyebrow">Register</span>
+        <h2 id="register-title">Create your account</h2>
+        <p>Enter your details to start setting up your school workspace.</p>
+      </div>
+
+      <form class="auth-form">
+        <label class="field">
+          <span>Full name</span>
+          <input type="text" name="name" autocomplete="name" placeholder="Ayushmaan Mishra" required>
+        </label>
+
+        <label class="field">
+          <span>School email</span>
+          <input type="email" name="email" autocomplete="email" placeholder="admin@school.edu" required>
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <input type="password" name="password" autocomplete="new-password" placeholder="Create password" required>
+        </label>
+
+        <label class="field">
+          <span>Confirm password</span>
+          <input type="password" name="confirmPassword" autocomplete="new-password" placeholder="Confirm password" required>
+        </label>
+
+        <label class="check-field">
+          <input type="checkbox" name="terms" required>
+          <span>I agree to the terms and privacy policy</span>
+        </label>
+
+        <button class="primary-action auth-submit" type="submit">Create account</button>
+      </form>
+
+      <p class="auth-switch">
+        Already registered?
+        <a routerLink="/login">Sign in</a>
+      </p>
+    </div>
+  </section>
+</main>

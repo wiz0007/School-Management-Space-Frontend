@@ -1,0 +1,97 @@
+<main class="app-shell">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="/home" aria-label="SchoolSys home">
+      <span class="brand__mark">S</span>
+      <span>
+        <strong>SchoolSys</strong>
+        <small>Admin Portal</small>
+      </span>
+    </a>
+
+    <nav class="sidebar__nav">
+      @for (item of sidebarItems; track item.label) {
+        <a class="sidebar-link" [class.sidebar-link--active]="item.active" href="#">
+          <span>{{ item.code }}</span>
+          <strong>{{ item.label }}</strong>
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <section class="workspace">
+    <header class="navbar">
+      <div class="navbar__title">
+        <span class="eyebrow">Dashboard</span>
+        <h1>Home</h1>
+      </div>
+
+      <label class="search-box" aria-label="Search school records">
+        <span aria-hidden="true"></span>
+        <input type="search" placeholder="Search students, staff, classes">
+      </label>
+
+      <div class="navbar__actions">
+        <button class="icon-button" type="button" aria-label="Notifications">
+          <span class="dot" aria-hidden="true"></span>
+        </button>
+        <button class="user-menu" type="button">
+          <span>AM</span>
+          <strong>Admin</strong>
+        </button>
+      </div>
+    </header>
+
+    <section class="welcome-panel" aria-labelledby="welcome-title">
+      <div>
+        <span class="eyebrow">Academic command center</span>
+        <h2 id="welcome-title">Welcome back, Ayushmaan.</h2>
+        <p>Track students, staff, attendance, fees, exams, and school operations from one secure workspace.</p>
+      </div>
+
+      <button class="primary-action" type="button">Add student</button>
+    </section>
+
+    <section class="summary-grid" aria-label="School summary">
+      @for (card of summaryCards; track card.label) {
+        <article class="summary-card">
+          <span>{{ card.label }}</span>
+          <strong>{{ card.value }}</strong>
+          <small>{{ card.detail }}</small>
+        </article>
+      }
+    </section>
+
+    <section class="content-grid">
+      <article class="panel">
+        <div class="panel__header">
+          <div>
+            <span class="eyebrow">Quick access</span>
+            <h2>Start a workflow</h2>
+          </div>
+        </div>
+
+        <div class="workflow-grid">
+          <button type="button">Register student</button>
+          <button type="button">Mark attendance</button>
+          <button type="button">Create class</button>
+          <button type="button">Collect fees</button>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel__header">
+          <div>
+            <span class="eyebrow">Recent activity</span>
+            <h2>Updates</h2>
+          </div>
+        </div>
+
+        <ul class="activity-list">
+          @for (activity of activities; track activity) {
+            <li>{{ activity }}</li>
+          }
+        </ul>
+      </article>
+    </section>
+  </section>
+</main>
