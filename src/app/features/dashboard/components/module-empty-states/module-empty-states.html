@@ -1,0 +1,12 @@
+<section class="module-grid" aria-label="Dashboard modules">
+  @for (module of modules; track module.title) {
+    <article class="module-card">
+      <div>
+        <span class="eyebrow">Module</span>
+        <h2>{{ module.title }}</h2>
+      </div>
+      <p>No records yet.</p>
+      <button type="button">{{ module.action }}</button>
+    </article>
+  }
+</section>

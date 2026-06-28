@@ -15,9 +15,8 @@ export interface UserProfile {
 }
 
 export interface AuthResponse {
-  accessToken: string;
-  tokenType: 'Bearer';
-  expiresInSeconds: number;
+  accessExpiresInSeconds: number;
+  refreshExpiresInSeconds: number;
   user: UserProfile;
 }
 

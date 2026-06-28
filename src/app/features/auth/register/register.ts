@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+﻿import { Component, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AuthService } from '../../../core/auth/auth.service';
-import { inject, signal } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -22,13 +21,44 @@ export class Register {
   protected readonly registerForm = this.formBuilder.nonNullable.group({
     fullName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(120)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(72)]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(72),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/)
+      ]
+    ],
     confirmPassword: ['', [Validators.required]]
   });
+
+  protected passwordScore(): number {
+    const password = this.registerForm.controls.password.value;
+    return [
+      password.length >= 10,
+      /[a-z]/.test(password),
+      /[A-Z]/.test(password),
+      /\d/.test(password),
+      /[^A-Za-z0-9]/.test(password)
+    ].filter(Boolean).length;
+  }
+
+  protected passwordStrength(): string {
+    const score = this.passwordScore();
+    if (score <= 2) {
+      return 'Weak';
+    }
+    if (score <= 4) {
+      return 'Good';
+    }
+    return 'Strong';
+  }
 
   protected submit(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
+      this.errorMessage.set('Please complete all required fields with valid details.');
       return;
     }
 

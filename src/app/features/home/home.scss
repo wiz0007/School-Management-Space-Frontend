@@ -95,7 +95,7 @@
 
 .navbar {
   align-items: center;
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   box-shadow: 0 10px 28px rgba(23, 32, 38, 0.06);
@@ -151,42 +151,57 @@
   }
 }
 
-.navbar__actions {
+.navbar__actions,
+.hero-actions {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
 }
 
-.dot {
-  background: var(--rose);
-  border-radius: 50%;
-  box-shadow: 0 0 0 6px rgba(225, 29, 72, 0.12);
-  display: inline-block;
-  height: 0.55rem;
-  width: 0.55rem;
-}
-
-.user-menu {
+.primary-action,
+.secondary-action,
+.ghost-action {
   align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   display: inline-flex;
-  gap: var(--space-2);
-  min-height: 2.75rem;
-  padding: 0 var(--space-3);
+  font-weight: 850;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 var(--space-5);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
 
-  span {
-    align-items: center;
-    aspect-ratio: 1;
-    background: #e9f6f2;
-    border-radius: 50%;
-    color: var(--teal);
-    display: inline-flex;
-    font-size: 0.78rem;
-    font-weight: 900;
-    justify-content: center;
-    inline-size: 1.8rem;
+.primary-action {
+  background: var(--teal);
+  border: 1px solid var(--teal);
+  color: #ffffff;
+
+  &:hover {
+    box-shadow: 0 12px 24px rgba(15, 118, 110, 0.18);
+    transform: translateY(-1px);
+  }
+}
+
+.primary-action--compact,
+.ghost-action {
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+}
+
+.secondary-action,
+.ghost-action {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  color: var(--text);
+
+  &:hover {
+    border-color: var(--teal);
+    box-shadow: 0 10px 24px rgba(15, 118, 110, 0.1);
+    transform: translateY(-1px);
   }
 }
 
@@ -223,27 +238,27 @@
 }
 
 .summary-card {
-  min-height: 8.75rem;
+  min-height: 10rem;
   padding: var(--space-5);
 
-  span,
-  small {
-    color: var(--muted);
+  span {
+    color: var(--text);
     display: block;
-    font-weight: 760;
+    font-size: 1.05rem;
+    font-weight: 900;
+    margin-bottom: var(--space-3);
   }
 
-  strong {
-    display: block;
-    font-size: 2rem;
-    margin: var(--space-3) 0;
+  p {
+    color: var(--muted);
+    line-height: 1.55;
   }
 }
 
 .content-grid {
   display: grid;
   gap: var(--space-4);
-  grid-template-columns: minmax(0, 1.2fr) minmax(19rem, 0.8fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(19rem, 0.9fr);
 }
 
 .panel {
@@ -259,34 +274,7 @@
   }
 }
 
-.workflow-grid {
-  display: grid;
-  gap: var(--space-3);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  button {
-    background: #f8faf7;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    font-weight: 820;
-    min-height: 4.25rem;
-    padding: var(--space-4);
-    text-align: left;
-    transition:
-      border-color 180ms ease,
-      box-shadow 180ms ease,
-      transform 180ms ease;
-
-    &:hover {
-      border-color: var(--teal);
-      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.1);
-      transform: translateY(-1px);
-    }
-  }
-}
-
-.activity-list {
+.setup-list {
   display: grid;
   gap: var(--space-3);
   list-style: none;
@@ -294,10 +282,40 @@
   padding: 0;
 
   li {
-    border-left: 3px solid var(--teal);
+    align-items: center;
+    background: #f8faf7;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    display: flex;
+    font-weight: 780;
+    min-height: 3.75rem;
+    padding: 0 var(--space-4);
+
+    &::before {
+      background: var(--teal);
+      border-radius: 50%;
+      content: "";
+      display: inline-block;
+      height: 0.55rem;
+      margin-right: var(--space-3);
+      width: 0.55rem;
+    }
+  }
+}
+
+.empty-panel {
+  align-content: start;
+  display: grid;
+  gap: var(--space-4);
+
+  p {
     color: var(--muted);
-    line-height: 1.5;
-    padding: var(--space-2) 0 var(--space-2) var(--space-3);
+    line-height: 1.6;
+  }
+
+  .secondary-action {
+    justify-self: start;
   }
 }
 
@@ -357,12 +375,11 @@
     flex-direction: column;
   }
 
-  .summary-grid,
-  .workflow-grid {
+  .summary-grid {
     grid-template-columns: 1fr;
   }
 
   .navbar__actions {
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 }

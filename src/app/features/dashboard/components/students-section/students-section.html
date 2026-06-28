@@ -1,0 +1,108 @@
+<section class="students-panel" id="students" aria-labelledby="students-title">
+  <div class="panel-heading">
+    <div>
+      <span class="eyebrow">Students</span>
+      <h2 id="students-title">Student records</h2>
+    </div>
+    <span class="status-pill status-pill--muted">{{ students().length }} saved</span>
+  </div>
+
+  @if (!hasSchoolProfile()) {
+    <p class="state-text">Create the school profile before adding students.</p>
+  }
+
+  <div class="students-layout">
+    <form class="student-form" [formGroup]="studentForm" (ngSubmit)="saveStudent()">
+      <label class="field">
+        <span>Student name</span>
+        <input type="text" formControlName="fullName" placeholder="Enter student name">
+      </label>
+
+      <label class="field">
+        <span>Admission number</span>
+        <input type="text" formControlName="admissionNumber" placeholder="Enter admission number">
+      </label>
+
+      <label class="field">
+        <span>Class</span>
+        <input type="text" formControlName="className" placeholder="Enter class">
+      </label>
+
+      <label class="field">
+        <span>Section</span>
+        <input type="text" formControlName="sectionName" placeholder="Enter section">
+      </label>
+
+      <label class="field">
+        <span>Date of birth</span>
+        <input type="date" formControlName="dateOfBirth">
+      </label>
+
+      <label class="field">
+        <span>Gender</span>
+        <select formControlName="gender">
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Guardian name</span>
+        <input type="text" formControlName="guardianName" placeholder="Enter guardian name">
+      </label>
+
+      <label class="field">
+        <span>Guardian phone</span>
+        <input type="tel" formControlName="guardianPhone" placeholder="Enter guardian phone">
+      </label>
+
+      <label class="field field--wide">
+        <span>Guardian email</span>
+        <input type="email" formControlName="guardianEmail" placeholder="Enter guardian email">
+      </label>
+
+      <label class="field">
+        <span>Status</span>
+        <select formControlName="status">
+          <option value="ACTIVE">Active</option>
+          <option value="INACTIVE">Inactive</option>
+        </select>
+      </label>
+
+      @if (studentError()) {
+        <p class="form-error field--wide">{{ studentError() }}</p>
+      }
+
+      @if (studentMessage()) {
+        <p class="form-success field--wide">{{ studentMessage() }}</p>
+      }
+
+      <div class="form-actions field--wide">
+        <button class="primary-action" type="submit" [disabled]="isSavingStudent() || !hasSchoolProfile()">
+          {{ isSavingStudent() ? 'Saving...' : 'Add student' }}
+        </button>
+      </div>
+    </form>
+
+    <div class="student-list" aria-label="Saved students">
+      @if (isLoadingStudents()) {
+        <p class="state-text">Loading students...</p>
+      }
+
+      @if (!isLoadingStudents() && students().length === 0) {
+        <p class="state-text">No student records yet.</p>
+      }
+
+      @for (student of students(); track student.id) {
+        <article class="student-row">
+          <div>
+            <strong>{{ student.fullName }}</strong>
+            <span>{{ student.admissionNumber }} | {{ student.className }} {{ student.sectionName }}</span>
+          </div>
+          <small>{{ student.status }}</small>
+        </article>
+      }
+    </div>
+  </div>
+</section>

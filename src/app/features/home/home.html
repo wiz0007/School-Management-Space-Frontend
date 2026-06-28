@@ -4,13 +4,13 @@
       <span class="brand__mark">S</span>
       <span>
         <strong>SchoolSys</strong>
-        <small>Admin Portal</small>
+        <small>Secure School Platform</small>
       </span>
     </a>
 
     <nav class="sidebar__nav">
       @for (item of sidebarItems; track item.label) {
-        <a class="sidebar-link" [class.sidebar-link--active]="item.active" href="#">
+        <a class="sidebar-link" [class.sidebar-link--active]="item.active" href="/home">
           <span>{{ item.code }}</span>
           <strong>{{ item.label }}</strong>
         </a>
@@ -21,42 +21,48 @@
   <section class="workspace">
     <header class="navbar">
       <div class="navbar__title">
-        <span class="eyebrow">Dashboard</span>
-        <h1>Home</h1>
+        <span class="eyebrow">Public Home</span>
+        <h1>SchoolSys</h1>
       </div>
 
-      <label class="search-box" aria-label="Search school records">
+      <label class="search-box" aria-label="Search platform modules">
         <span aria-hidden="true"></span>
-        <input type="search" placeholder="Search students, staff, classes">
+        <input type="search" placeholder="Search modules">
       </label>
 
       <div class="navbar__actions">
-        <button class="icon-button" type="button" aria-label="Notifications">
-          <span class="dot" aria-hidden="true"></span>
-        </button>
-        <button class="user-menu" type="button">
-          <span>AM</span>
-          <strong>Admin</strong>
-        </button>
+        @if (currentUser()) {
+          <a class="primary-action primary-action--compact" href="/dashboard">Dashboard</a>
+          <button class="ghost-action" type="button" (click)="logout()">Logout</button>
+        } @else {
+          <a class="ghost-action" href="/login">Login</a>
+          <a class="primary-action primary-action--compact" href="/register">Register</a>
+        }
       </div>
     </header>
 
     <section class="welcome-panel" aria-labelledby="welcome-title">
       <div>
-        <span class="eyebrow">Academic command center</span>
-        <h2 id="welcome-title">Welcome back, Ayushmaan.</h2>
-        <p>Track students, staff, attendance, fees, exams, and school operations from one secure workspace.</p>
+        <span class="eyebrow">Secure school management</span>
+        <h2 id="welcome-title">Start with a clean workspace.</h2>
+        <p>Manage admissions, academics, attendance, finance, reports, and staff access once your real school data is connected.</p>
       </div>
 
-      <button class="primary-action" type="button">Add student</button>
+      <div class="hero-actions">
+        @if (currentUser()) {
+          <a class="primary-action" href="/dashboard">Open dashboard</a>
+        } @else {
+          <a class="primary-action" href="/register">Create account</a>
+          <a class="secondary-action" href="/login">Sign in</a>
+        }
+      </div>
     </section>
 
-    <section class="summary-grid" aria-label="School summary">
-      @for (card of summaryCards; track card.label) {
+    <section class="summary-grid" aria-label="Platform modules">
+      @for (module of modules; track module.title) {
         <article class="summary-card">
-          <span>{{ card.label }}</span>
-          <strong>{{ card.value }}</strong>
-          <small>{{ card.detail }}</small>
+          <span>{{ module.title }}</span>
+          <p>{{ module.description }}</p>
         </article>
       }
     </section>
@@ -65,32 +71,32 @@
       <article class="panel">
         <div class="panel__header">
           <div>
-            <span class="eyebrow">Quick access</span>
-            <h2>Start a workflow</h2>
+            <span class="eyebrow">Workspace setup</span>
+            <h2>Before records appear</h2>
           </div>
         </div>
 
-        <div class="workflow-grid">
-          <button type="button">Register student</button>
-          <button type="button">Mark attendance</button>
-          <button type="button">Create class</button>
-          <button type="button">Collect fees</button>
-        </div>
-      </article>
-
-      <article class="panel">
-        <div class="panel__header">
-          <div>
-            <span class="eyebrow">Recent activity</span>
-            <h2>Updates</h2>
-          </div>
-        </div>
-
-        <ul class="activity-list">
-          @for (activity of activities; track activity) {
-            <li>{{ activity }}</li>
+        <ul class="setup-list">
+          @for (step of setupSteps; track step) {
+            <li>{{ step }}</li>
           }
         </ul>
+      </article>
+
+      <article class="panel empty-panel">
+        <div class="panel__header">
+          <div>
+            <span class="eyebrow">Live data</span>
+            <h2>No records loaded</h2>
+          </div>
+        </div>
+
+        <p>Your dashboard activity, counts, alerts, and reports will appear here only after real backend data is available.</p>
+        @if (currentUser()) {
+          <a class="secondary-action" href="/dashboard">Continue setup</a>
+        } @else {
+          <a class="secondary-action" href="/register">Set up workspace</a>
+        }
       </article>
     </section>
   </section>

@@ -1,0 +1,100 @@
+<section class="staff-panel" id="staff" aria-labelledby="staff-title">
+  <div class="panel-heading">
+    <div>
+      <span class="eyebrow">Staff</span>
+      <h2 id="staff-title">Staff records</h2>
+    </div>
+    <span class="status-pill status-pill--muted">{{ staffMembers().length }} saved</span>
+  </div>
+
+  @if (!hasSchoolProfile()) {
+    <p class="state-text">Create the school profile before adding staff.</p>
+  }
+
+  <div class="staff-layout">
+    <form class="staff-form" [formGroup]="staffForm" (ngSubmit)="saveStaff()">
+      <label class="field">
+        <span>Staff name</span>
+        <input type="text" formControlName="fullName" placeholder="Enter staff name">
+      </label>
+
+      <label class="field">
+        <span>Employee code</span>
+        <input type="text" formControlName="employeeCode" placeholder="Enter employee code">
+      </label>
+
+      <label class="field">
+        <span>Role</span>
+        <input type="text" formControlName="role" placeholder="Enter role">
+      </label>
+
+      <label class="field">
+        <span>Department</span>
+        <input type="text" formControlName="department" placeholder="Enter department">
+      </label>
+
+      <label class="field">
+        <span>Email</span>
+        <input type="email" formControlName="email" placeholder="Enter email">
+      </label>
+
+      <label class="field">
+        <span>Phone</span>
+        <input type="tel" formControlName="phone" placeholder="Enter phone">
+      </label>
+
+      <label class="field">
+        <span>Joining date</span>
+        <input type="date" formControlName="joiningDate">
+      </label>
+
+      <label class="field">
+        <span>Status</span>
+        <select formControlName="status">
+          <option value="ACTIVE">Active</option>
+          <option value="INACTIVE">Inactive</option>
+        </select>
+      </label>
+
+      @if (staffError()) {
+        <p class="form-error field--wide">{{ staffError() }}</p>
+      }
+
+      @if (staffMessage()) {
+        <p class="form-success field--wide">{{ staffMessage() }}</p>
+      }
+
+      <div class="form-actions field--wide">
+        @if (editingStaffId()) {
+          <button class="ghost-action" type="button" (click)="cancelEdit()">Cancel edit</button>
+        }
+        <button class="primary-action" type="submit" [disabled]="isSavingStaff() || !hasSchoolProfile()">
+          {{ isSavingStaff() ? 'Saving...' : editingStaffId() ? 'Update staff' : 'Add staff' }}
+        </button>
+      </div>
+    </form>
+
+    <div class="staff-list" aria-label="Saved staff">
+      @if (isLoadingStaff()) {
+        <p class="state-text">Loading staff...</p>
+      }
+
+      @if (!isLoadingStaff() && staffMembers().length === 0) {
+        <p class="state-text">No staff records yet.</p>
+      }
+
+      @for (member of staffMembers(); track member.id) {
+        <article class="staff-row">
+          <div>
+            <strong>{{ member.fullName }}</strong>
+            <span>{{ member.employeeCode }} | {{ member.role }} | {{ member.department }}</span>
+          </div>
+          <div class="staff-row__actions">
+            <small>{{ member.status }}</small>
+            <button type="button" (click)="editStaff(member)">Edit</button>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,19 +1,13 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-
-const tokenKey = 'schoolsys.accessToken';
+﻿import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authTokenInterceptor: HttpInterceptorFn = (request, next) => {
-  const token = globalThis.localStorage?.getItem(tokenKey);
-
-  if (!token || request.headers.has('Authorization')) {
+  if (!request.url.startsWith('http://localhost:8080/api/')) {
     return next(request);
   }
 
   return next(
     request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
+      withCredentials: true
     })
   );
 };

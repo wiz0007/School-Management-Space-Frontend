@@ -1,0 +1,73 @@
+<main class="dashboard-shell">
+  <aside class="sidebar" aria-label="Dashboard navigation">
+    <a class="brand" href="/dashboard" aria-label="SchoolSys dashboard">
+      <span class="brand__mark">S</span>
+      <span>
+        <strong>SchoolSys</strong>
+        <small>Workspace</small>
+      </span>
+    </a>
+
+    <nav class="sidebar__nav">
+      @for (item of navigationItems; track item.label) {
+        <a class="sidebar-link" [class.sidebar-link--active]="item.active" href="/dashboard">
+          <span>{{ item.code }}</span>
+          <strong>{{ item.label }}</strong>
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <section class="dashboard-workspace">
+    <header class="dashboard-navbar">
+      <div>
+        <span class="eyebrow">Protected Dashboard</span>
+        <h1>Workspace</h1>
+      </div>
+
+      <div class="user-panel">
+        @if (currentUser(); as user) {
+          <span class="avatar">{{ user.fullName.charAt(0) }}</span>
+          <div>
+            <strong>{{ user.fullName }}</strong>
+            <small>{{ user.role }} | {{ user.email }}</small>
+          </div>
+        }
+        <button class="ghost-action" type="button" (click)="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="welcome-panel">
+      <div>
+        <span class="eyebrow">Authenticated session</span>
+        @if (currentUser(); as user) {
+          <h2>Welcome, {{ user.fullName }}.</h2>
+          <p>Your secure workspace is ready. Start by saving the institution profile, then connect real school records module by module.</p>
+        }
+      </div>
+      <a class="primary-action" href="#school-profile">Start school setup</a>
+    </section>
+
+    <section class="identity-grid" aria-label="Current account">
+      @if (currentUser(); as user) {
+        <article>
+          <span>Name</span>
+          <strong>{{ user.fullName }}</strong>
+        </article>
+        <article>
+          <span>Email</span>
+          <strong>{{ user.email }}</strong>
+        </article>
+        <article>
+          <span>Role</span>
+          <strong>{{ user.role }}</strong>
+        </article>
+      }
+    </section>
+
+    <app-school-profile-section (profileStateChange)="onSchoolProfileStateChange($event)" />
+    <app-students-section [hasSchoolProfile]="hasSchoolProfile()" [reloadKey]="studentReloadKey()" />
+    <app-staff-section [hasSchoolProfile]="hasSchoolProfile()" [reloadKey]="studentReloadKey()" />
+    <app-module-empty-states />
+  </section>
+</main>

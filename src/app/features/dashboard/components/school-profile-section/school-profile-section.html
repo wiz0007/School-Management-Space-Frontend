@@ -1,0 +1,76 @@
+<section class="profile-panel" id="school-profile" aria-labelledby="school-profile-title">
+  <div class="panel-heading">
+    <div>
+      <span class="eyebrow">School Profile</span>
+      <h2 id="school-profile-title">Institution setup</h2>
+    </div>
+    @if (schoolProfile()) {
+      <span class="status-pill">Saved</span>
+    } @else {
+      <span class="status-pill status-pill--muted">Not configured</span>
+    }
+  </div>
+
+  @if (isLoadingProfile()) {
+    <p class="state-text">Loading school profile...</p>
+  }
+
+  <form class="profile-form" [formGroup]="schoolProfileForm" (ngSubmit)="saveSchoolProfile()">
+    <label class="field field--wide">
+      <span>School name</span>
+      <input type="text" formControlName="schoolName" autocomplete="organization" placeholder="Enter school name">
+    </label>
+
+    <label class="field field--wide">
+      <span>Address</span>
+      <textarea formControlName="address" rows="3" placeholder="Enter school address"></textarea>
+    </label>
+
+    <label class="field">
+      <span>Contact email</span>
+      <input type="email" formControlName="contactEmail" autocomplete="email" placeholder="Enter contact email">
+    </label>
+
+    <label class="field">
+      <span>Phone</span>
+      <input type="tel" formControlName="phone" autocomplete="tel" placeholder="Enter phone number">
+    </label>
+
+    <label class="field">
+      <span>Academic year</span>
+      <input type="text" formControlName="academicYear" placeholder="Enter academic year">
+    </label>
+
+    <label class="field">
+      <span>Principal name</span>
+      <input type="text" formControlName="principalName" autocomplete="name" placeholder="Enter principal name">
+    </label>
+
+    <label class="field">
+      <span>Timezone</span>
+      <input type="text" formControlName="timezone" placeholder="Enter timezone">
+    </label>
+
+    <label class="field">
+      <span>Status</span>
+      <select formControlName="status">
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+      </select>
+    </label>
+
+    @if (profileError()) {
+      <p class="form-error field--wide">{{ profileError() }}</p>
+    }
+
+    @if (profileMessage()) {
+      <p class="form-success field--wide">{{ profileMessage() }}</p>
+    }
+
+    <div class="form-actions field--wide">
+      <button class="primary-action" type="submit" [disabled]="isSavingProfile()">
+        {{ isSavingProfile() ? 'Saving...' : 'Save school profile' }}
+      </button>
+    </div>
+  </form>
+</section>
