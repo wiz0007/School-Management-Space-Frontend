@@ -7,8 +7,6 @@ import { Component } from '@angular/core';
 })
 export class ModuleEmptyStates {
   protected readonly modules = [
-    { title: 'Classes', action: 'Create class structure' },
-    { title: 'Attendance', action: 'Prepare attendance settings' },
     { title: 'Fees', action: 'Set up fee categories' },
     { title: 'Exams', action: 'Create exam structure' },
     { title: 'Reports', action: 'Connect real reporting data' }

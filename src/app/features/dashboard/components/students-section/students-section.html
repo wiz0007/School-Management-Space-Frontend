@@ -23,6 +23,16 @@
         <input type="text" formControlName="admissionNumber" placeholder="Enter admission number">
       </label>
 
+      <label class="field field--wide">
+        <span>Assign class</span>
+        <select formControlName="classId" (change)="applySelectedClass()">
+          <option value="">Use manual class and section</option>
+          @for (schoolClass of classes(); track schoolClass.id) {
+            <option [value]="schoolClass.id">{{ schoolClass.className }} {{ schoolClass.sectionName }} | {{ schoolClass.academicYear }}</option>
+          }
+        </select>
+      </label>
+
       <label class="field">
         <span>Class</span>
         <input type="text" formControlName="className" placeholder="Enter class">
@@ -98,7 +108,7 @@
         <article class="student-row">
           <div>
             <strong>{{ student.fullName }}</strong>
-            <span>{{ student.admissionNumber }} | {{ student.className }} {{ student.sectionName }}</span>
+            <span>{{ student.admissionNumber }} | {{ student.classDisplayName || (student.className + ' ' + student.sectionName) }}</span>
           </div>
           <small>{{ student.status }}</small>
         </article>

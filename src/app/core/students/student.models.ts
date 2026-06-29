@@ -2,6 +2,8 @@ export interface Student {
   id: string;
   fullName: string;
   admissionNumber: string;
+  classId: string | null;
+  classDisplayName: string | null;
   className: string;
   sectionName: string;
   dateOfBirth: string;
@@ -17,6 +19,7 @@ export interface Student {
 export interface StudentPayload {
   fullName: string;
   admissionNumber: string;
+  classId: string | null;
   className: string;
   sectionName: string;
   dateOfBirth: string;

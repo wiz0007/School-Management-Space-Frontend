@@ -68,6 +68,8 @@
     <app-school-profile-section (profileStateChange)="onSchoolProfileStateChange($event)" />
     <app-students-section [hasSchoolProfile]="hasSchoolProfile()" [reloadKey]="studentReloadKey()" />
     <app-staff-section [hasSchoolProfile]="hasSchoolProfile()" [reloadKey]="studentReloadKey()" />
+    <app-classes-section [hasSchoolProfile]="hasSchoolProfile()" [reloadKey]="studentReloadKey()" />
+    <app-attendance-section [hasSchoolProfile]="hasSchoolProfile()" [reloadKey]="studentReloadKey()" />
     <app-module-empty-states />
   </section>
 </main>

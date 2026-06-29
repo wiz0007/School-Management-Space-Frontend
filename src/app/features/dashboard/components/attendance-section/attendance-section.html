@@ -1,0 +1,82 @@
+<section class="attendance-panel" id="attendance" aria-labelledby="attendance-title">
+  <div class="panel-heading">
+    <div>
+      <span class="eyebrow">Attendance</span>
+      <h2 id="attendance-title">Daily roster</h2>
+    </div>
+    <span class="status-pill status-pill--muted">{{ entries.length }} students</span>
+  </div>
+
+  @if (!hasSchoolProfile()) {
+    <p class="state-text">Create the school profile before marking attendance.</p>
+  }
+
+  <form class="attendance-form" [formGroup]="attendanceForm" (ngSubmit)="saveAttendance()">
+    <div class="attendance-controls">
+      <label class="field">
+        <span>Class</span>
+        <select formControlName="classId">
+          <option value="">Select class</option>
+          @for (schoolClass of classes(); track schoolClass.id) {
+            <option [value]="schoolClass.id">{{ schoolClass.className }} {{ schoolClass.sectionName }} | {{ schoolClass.academicYear }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Date</span>
+        <input type="date" formControlName="attendanceDate">
+      </label>
+
+      <button class="ghost-action" type="button" (click)="loadRoster()" [disabled]="isLoadingRoster() || !hasSchoolProfile()">
+        {{ isLoadingRoster() ? 'Loading...' : 'Load roster' }}
+      </button>
+    </div>
+
+    @if (entries.length > 0) {
+      <div class="bulk-actions" aria-label="Bulk attendance actions">
+        <button type="button" (click)="markAll('PRESENT')">All present</button>
+        <button type="button" (click)="markAll('ABSENT')">All absent</button>
+      </div>
+    }
+
+    <div class="attendance-list" formArrayName="entries">
+      @for (entry of entries.controls; track entry.value.studentId; let index = $index) {
+        <article class="attendance-row" [formGroupName]="index">
+          <div>
+            <strong>{{ entry.value.studentName }}</strong>
+            <span>{{ entry.value.admissionNumber }}</span>
+          </div>
+
+          <label class="field field--status">
+            <span>Status</span>
+            <select formControlName="status">
+              @for (status of statuses; track status) {
+                <option [value]="status">{{ status }}</option>
+              }
+            </select>
+          </label>
+
+          <label class="field field--remarks">
+            <span>Remarks</span>
+            <input type="text" formControlName="remarks" placeholder="Optional remarks">
+          </label>
+        </article>
+      }
+    </div>
+
+    @if (attendanceError()) {
+      <p class="form-error">{{ attendanceError() }}</p>
+    }
+
+    @if (attendanceMessage()) {
+      <p class="form-success">{{ attendanceMessage() }}</p>
+    }
+
+    <div class="form-actions">
+      <button class="primary-action" type="submit" [disabled]="isSavingAttendance() || entries.length === 0 || !hasSchoolProfile()">
+        {{ isSavingAttendance() ? 'Saving...' : 'Save attendance' }}
+      </button>
+    </div>
+  </form>
+</section>

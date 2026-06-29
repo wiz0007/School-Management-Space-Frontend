@@ -1,0 +1,96 @@
+<section class="classes-panel" id="classes" aria-labelledby="classes-title">
+  <div class="panel-heading">
+    <div>
+      <span class="eyebrow">Classes</span>
+      <h2 id="classes-title">Class structure</h2>
+    </div>
+    <span class="status-pill status-pill--muted">{{ classes().length }} saved</span>
+  </div>
+
+  @if (!hasSchoolProfile()) {
+    <p class="state-text">Create the school profile before adding classes.</p>
+  }
+
+  <div class="classes-layout">
+    <form class="class-form" [formGroup]="classForm" (ngSubmit)="saveClass()">
+      <label class="field">
+        <span>Class</span>
+        <input type="text" formControlName="className" placeholder="Enter class">
+      </label>
+
+      <label class="field">
+        <span>Section</span>
+        <input type="text" formControlName="sectionName" placeholder="Enter section">
+      </label>
+
+      <label class="field">
+        <span>Academic year</span>
+        <input type="text" formControlName="academicYear" placeholder="Enter academic year">
+      </label>
+
+      <label class="field">
+        <span>Capacity</span>
+        <input type="number" formControlName="capacity" min="1" max="500">
+      </label>
+
+      <label class="field field--wide">
+        <span>Class teacher</span>
+        <select formControlName="classTeacherId">
+          <option value="">No teacher assigned</option>
+          @for (member of staffMembers(); track member.id) {
+            <option [value]="member.id">{{ member.fullName }} | {{ member.role }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Status</span>
+        <select formControlName="status">
+          <option value="ACTIVE">Active</option>
+          <option value="INACTIVE">Inactive</option>
+        </select>
+      </label>
+
+      @if (classError()) {
+        <p class="form-error field--wide">{{ classError() }}</p>
+      }
+
+      @if (classMessage()) {
+        <p class="form-success field--wide">{{ classMessage() }}</p>
+      }
+
+      <div class="form-actions field--wide">
+        @if (editingClassId()) {
+          <button class="ghost-action" type="button" (click)="cancelEdit()">Cancel edit</button>
+        }
+        <button class="primary-action" type="submit" [disabled]="isSavingClass() || !hasSchoolProfile()">
+          {{ isSavingClass() ? 'Saving...' : editingClassId() ? 'Update class' : 'Add class' }}
+        </button>
+      </div>
+    </form>
+
+    <div class="class-list" aria-label="Saved classes">
+      @if (isLoadingClasses()) {
+        <p class="state-text">Loading classes...</p>
+      }
+
+      @if (!isLoadingClasses() && classes().length === 0) {
+        <p class="state-text">No class records yet.</p>
+      }
+
+      @for (schoolClass of classes(); track schoolClass.id) {
+        <article class="class-row">
+          <div>
+            <strong>{{ schoolClass.className }} {{ schoolClass.sectionName }}</strong>
+            <span>{{ schoolClass.academicYear }} | Capacity {{ schoolClass.capacity }}</span>
+            <span>{{ schoolClass.classTeacherName || 'No teacher assigned' }}</span>
+          </div>
+          <div class="class-row__actions">
+            <small>{{ schoolClass.status }}</small>
+            <button type="button" (click)="editClass(schoolClass)">Edit</button>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

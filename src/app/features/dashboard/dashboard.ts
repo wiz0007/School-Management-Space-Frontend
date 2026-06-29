@@ -1,6 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
+import { AttendanceSection } from './components/attendance-section/attendance-section';
+import { ClassesSection } from './components/classes-section/classes-section';
 import { ModuleEmptyStates } from './components/module-empty-states/module-empty-states';
 import { SchoolProfileSection } from './components/school-profile-section/school-profile-section';
 import { StaffSection } from './components/staff-section/staff-section';
@@ -8,7 +10,7 @@ import { StudentsSection } from './components/students-section/students-section'
 
 @Component({
   selector: 'app-dashboard',
-  imports: [SchoolProfileSection, StudentsSection, StaffSection, ModuleEmptyStates],
+  imports: [SchoolProfileSection, StudentsSection, StaffSection, ClassesSection, AttendanceSection, ModuleEmptyStates],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
