@@ -13,55 +13,103 @@ export class Home implements OnInit {
 
   protected readonly currentUser = this.authService.currentUser;
 
-  protected readonly pageIndex = [
-    { number: '01', label: 'Start', href: '#start' },
-    { number: '02', label: 'Dayboard', href: '#dayboard' },
-    { number: '03', label: 'Security', href: '#security' },
-    { number: '04', label: 'Build Path', href: '#build-path' }
+  protected readonly navigationItems = [
+    { label: 'Promise', href: '#promise' },
+    { label: 'Journey', href: '#journey' },
+    { label: 'Modules', href: '#modules' },
+    { label: 'People', href: '#people' },
+    { label: 'Trust', href: '#trust' }
   ];
 
-  protected readonly moduleStations = [
-    { time: '08:00', title: 'School Profile', tone: 'foundation', description: 'Institution identity, academic year, timezone, status.' },
-    { time: '08:30', title: 'Students', tone: 'students', description: 'Real student records with class assignment support.' },
-    { time: '09:00', title: 'Staff', tone: 'staff', description: 'Employee records, roles, and update workflows.' },
-    { time: '09:30', title: 'Classes', tone: 'classes', description: 'Class sections and optional teacher ownership.' },
-    { time: '10:00', title: 'Attendance', tone: 'attendance', description: 'Daily marking from actual class rosters.' },
-    { time: 'Next', title: 'Reports', tone: 'reports', description: 'Attendance summaries, histories, and exports.' }
+  protected readonly operatingPromises = [
+    'Replace scattered registers with one school workspace',
+    'Start each day with students, staff, classes, and attendance aligned',
+    'Keep visitors informed and signed-in users focused on real work'
   ];
 
-  protected readonly visitorPaths = [
+  protected readonly journeyStages = [
     {
-      label: 'For a visitor',
-      title: 'Understand the product before entering the workspace.',
-      detail: 'The public site explains what SchoolSys does, where security lives, and which modules are already active.'
+      label: 'First setup',
+      title: 'Create the school workspace',
+      detail: 'Open the product with a clear public story, then register the administrator who will run the workspace.'
     },
     {
-      label: 'For an admin',
-      title: 'Move directly into protected daily work.',
-      detail: 'Authenticated users can jump from the intro into the dashboard without seeing demo records or fake counters.'
+      label: 'Institution desk',
+      title: 'Set the school identity',
+      detail: 'Capture profile, academic year, contact details, timezone, and operating status once.'
     },
     {
-      label: 'For development',
-      title: 'Add features without tangling the whole product.',
-      detail: 'Each school domain keeps its own backend service layer, Angular service, component, and SCSS surface.'
+      label: 'Records room',
+      title: 'Bring people into order',
+      detail: 'Build student and staff records with details that the daily workflow can reuse.'
+    },
+    {
+      label: 'Academic floor',
+      title: 'Shape classes and sections',
+      detail: 'Connect students, staff, and class structures so the school day has a real operating map.'
+    },
+    {
+      label: 'Morning bell',
+      title: 'Run attendance from rosters',
+      detail: 'Mark daily attendance from actual class assignments instead of disconnected lists.'
     }
   ];
 
-  protected readonly securityLedger = [
-    { label: 'Session', value: 'HttpOnly cookies only' },
-    { label: 'Access JWT', value: '15 minute lifetime' },
-    { label: 'Refresh JWT', value: '7 day rotation' },
-    { label: 'Stolen token catch', value: 'Database hash verification' },
-    { label: 'Resource access', value: 'Server-side ownership checks' },
-    { label: 'Input boundary', value: 'Validated request DTOs' }
+  protected readonly moduleSuites = [
+    {
+      name: 'Student Office',
+      summary: 'Student records, guardians, class assignment, and enrollment-ready details.',
+      items: ['Student profile', 'Guardian contact', 'Class link', 'Status']
+    },
+    {
+      name: 'Faculty Desk',
+      summary: 'Staff records and the foundation for role-based school workflows.',
+      items: ['Employee profile', 'Contact details', 'Teacher assignment', 'Updates']
+    },
+    {
+      name: 'Academic Floor',
+      summary: 'Class sections, capacity, teacher ownership, and academic year structure.',
+      items: ['Classes', 'Sections', 'Class teacher', 'Capacity']
+    },
+    {
+      name: 'Daily Register',
+      summary: 'Attendance built around rosters, daily status, and future reporting.',
+      items: ['Roster view', 'Present/absent', 'Late/excused', 'History-ready']
+    }
   ];
 
-  protected readonly buildSteps = [
-    'Create the administrator workspace',
-    'Complete the school profile',
-    'Add students, staff, and classes',
-    'Run class attendance from real rosters',
-    'Expand reports and export workflows'
+  protected readonly audienceCards = [
+    {
+      audience: 'School owners',
+      line: 'See whether the school is ready to operate digitally.',
+      detail: 'The intro explains the product clearly, while the dashboard keeps actual operations private.'
+    },
+    {
+      audience: 'Administrators',
+      line: 'Move from setup to daily records without switching tools.',
+      detail: 'School profile, students, staff, classes, and attendance follow one connected routine.'
+    },
+    {
+      audience: 'Teachers',
+      line: 'Start the day from clean class rosters.',
+      detail: 'Attendance is designed around real class assignments instead of repeated manual lists.'
+    }
+  ];
+
+  protected readonly trustPoints = [
+    'Private workspace after login',
+    'Clean public visitor experience',
+    'Real records, not demo counters',
+    'School-owned operational data',
+    'Prepared for roles and reporting',
+    'Built to grow module by module'
+  ];
+
+  protected readonly nextMoves = [
+    'Attendance reports by class and date',
+    'Student edit and profile history',
+    'Parent communication layer',
+    'Export-ready school summaries'
   ];
 
   ngOnInit(): void {

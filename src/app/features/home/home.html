@@ -1,133 +1,174 @@
-<main class="schoolsys-intro">
-  <aside class="site-index" aria-label="Page index">
-    <a class="index-brand" href="/home" aria-label="SchoolSys home">S</a>
-    <nav>
-      @for (item of pageIndex; track item.number) {
-        <a [href]="item.href">
-          <span>{{ item.number }}</span>
-          {{ item.label }}
-        </a>
+<main class="school-site">
+  <header class="site-header">
+    <a class="brand" href="/home" aria-label="SchoolSys home">
+      <span class="brand__mark">S</span>
+      <span>
+        <strong>SchoolSys</strong>
+        <small>School operations workspace</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      @for (item of navigationItems; track item.label) {
+        <a [href]="item.href">{{ item.label }}</a>
       }
     </nav>
-  </aside>
 
-  <section class="hero" id="start" aria-labelledby="hero-title">
+    <div class="header-actions">
+      @if (currentUser()) {
+        <a class="plain-action" href="/dashboard">Dashboard</a>
+        <button class="solid-action" type="button" (click)="logout()">Logout</button>
+      } @else {
+        <a class="plain-action" href="/login">Login</a>
+        <a class="solid-action" href="/register">Create workspace</a>
+      }
+    </div>
+  </header>
+
+  <section class="hero" id="promise" aria-labelledby="hero-title">
     <video class="hero__video" autoplay muted loop playsinline poster="/assets/visitor/school-hero-poster.jpg">
       <source src="/assets/visitor/school-hero.mp4" type="video/mp4" />
     </video>
     <div class="hero__fallback" aria-hidden="true"></div>
-    <div class="hero__wash" aria-hidden="true"></div>
+    <div class="hero__shade" aria-hidden="true"></div>
 
-    <header class="topline">
-      <a class="wordmark" href="/home">
-        <strong>SchoolSys</strong>
-        <span>School operations, secured</span>
-      </a>
-
-      <div class="topline__actions">
-        @if (currentUser()) {
-          <a class="text-link" href="/dashboard">Dashboard</a>
-          <button class="solid-link" type="button" (click)="logout()">Logout</button>
-        } @else {
-          <a class="text-link" href="/login">Login</a>
-          <a class="solid-link" href="/register">Register</a>
-        }
-      </div>
-    </header>
-
-    <div class="hero__content">
-      <div class="hero__copy">
-        <p class="section-code">Visitor introduction</p>
-        <h1 id="hero-title">School days, organized before the bell rings.</h1>
+    <div class="hero__inner">
+      <article class="hero__copy">
+        <span class="section-label">SchoolSys operating promise</span>
+        <h1 id="hero-title">School data chaos, brought into rhythm.</h1>
         <p>
-          A public introduction for visitors, and a secure operating workspace for administrators managing real school records.
+          Give visitors a clear reason to trust the product, then help administrators manage school profile, students, staff, classes, and attendance from one focused workspace.
         </p>
 
         <div class="hero__actions">
           @if (currentUser()) {
-            <a class="solid-link solid-link--large" href="/dashboard">Open workspace</a>
+            <a class="solid-action solid-action--large" href="/dashboard">Open dashboard</a>
           } @else {
-            <a class="solid-link solid-link--large" href="/register">Create workspace</a>
-            <a class="outline-link" href="#dayboard">Explore the dayboard</a>
+            <a class="solid-action solid-action--large" href="/register">Start the workspace</a>
+            <a class="outline-action" href="#journey">See the flow</a>
           }
         </div>
-      </div>
-
-      <div class="day-snapshot" aria-label="SchoolSys day snapshot">
-        <div class="snapshot__header">
-          <span>Today</span>
-          <strong>Operations board</strong>
-        </div>
-        <div class="snapshot__grid">
-          <span class="snapshot__tile snapshot__tile--profile">Profile</span>
-          <span class="snapshot__tile snapshot__tile--students">Students</span>
-          <span class="snapshot__tile snapshot__tile--classes">Classes</span>
-          <span class="snapshot__tile snapshot__tile--attendance">Attendance</span>
-        </div>
-        <div class="snapshot__route">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="visitor-paths" aria-label="Visitor paths">
-    @for (path of visitorPaths; track path.label) {
-      <article>
-        <span>{{ path.label }}</span>
-        <h2>{{ path.title }}</h2>
-        <p>{{ path.detail }}</p>
       </article>
-    }
+
+      <aside class="rhythm-board" aria-label="SchoolSys rhythm board">
+        <div class="rhythm-board__top">
+          <span>Workspace rhythm</span>
+          <strong>Office → Classes → Attendance</strong>
+        </div>
+        <div class="rhythm-board__dial" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul>
+          @for (promise of operatingPromises; track promise) {
+            <li>{{ promise }}</li>
+          }
+        </ul>
+      </aside>
+    </div>
   </section>
 
-  <section class="dayboard" id="dayboard" aria-labelledby="dayboard-title">
-    <div class="section-heading section-heading--wide">
-      <p class="section-code">Module dayboard</p>
-      <h2 id="dayboard-title">The workspace is mapped like a school day.</h2>
-      <p>Instead of showing fake dashboard numbers, the intro presents the real modules as stations in the daily operating flow.</p>
+  <section class="signal-strip" aria-label="Product signals">
+    <span>Admissions-ready</span>
+    <span>Attendance-first</span>
+    <span>Records-centered</span>
+    <span>Dashboard protected</span>
+  </section>
+
+  <section class="journey" id="journey" aria-labelledby="journey-title">
+    <div class="section-heading">
+      <span class="section-label">Operating journey</span>
+      <h2 id="journey-title">From first setup to the morning bell.</h2>
+      <p>Inspired by the strongest school ERP sites: explain the journey, show the workflows, and keep the language focused on school outcomes.</p>
     </div>
 
-    <div class="station-board">
-      @for (station of moduleStations; track station.title) {
-        <article [class]="'station station--' + station.tone">
-          <span>{{ station.time }}</span>
-          <h3>{{ station.title }}</h3>
-          <p>{{ station.description }}</p>
+    <div class="journey-track">
+      @for (stage of journeyStages; track stage.label) {
+        <article>
+          <span>{{ stage.label }}</span>
+          <h3>{{ stage.title }}</h3>
+          <p>{{ stage.detail }}</p>
         </article>
       }
     </div>
   </section>
 
-  <section class="security-ledger" id="security" aria-labelledby="security-title">
-    <div class="ledger-intro">
-      <p class="section-code">Security ledger</p>
-      <h2 id="security-title">The login system is treated like infrastructure.</h2>
-      <p>Visitor pages stay public. Operational data sits behind authenticated routes, short-lived tokens, refresh rotation, and database-backed token checks.</p>
+  <section class="modules" id="modules" aria-labelledby="modules-title">
+    <div class="section-heading section-heading--split">
+      <div>
+        <span class="section-label">Module suites</span>
+        <h2 id="modules-title">A school workspace people can understand before they sign in.</h2>
+      </div>
+      <p>Modules are grouped by how schools work: the student office, faculty desk, academic floor, and daily register.</p>
     </div>
 
-    <div class="ledger-table" role="list">
-      @for (row of securityLedger; track row.label) {
-        <div role="listitem">
-          <span>{{ row.label }}</span>
-          <strong>{{ row.value }}</strong>
-        </div>
+    <div class="suite-grid">
+      @for (suite of moduleSuites; track suite.name) {
+        <article>
+          <h3>{{ suite.name }}</h3>
+          <p>{{ suite.summary }}</p>
+          <div>
+            @for (item of suite.items; track item) {
+              <span>{{ item }}</span>
+            }
+          </div>
+        </article>
       }
     </div>
   </section>
 
-  <section class="build-path" id="build-path" aria-labelledby="build-title">
-    <div>
-      <p class="section-code">Build path</p>
-      <h2 id="build-title">What the product should grow into next.</h2>
+  <section class="people" id="people" aria-labelledby="people-title">
+    <div class="people__intro">
+      <span class="section-label">For the people running the school</span>
+      <h2 id="people-title">The homepage should speak to roles, not databases.</h2>
     </div>
 
-    <ol>
-      @for (step of buildSteps; track step) {
-        <li>{{ step }}</li>
+    <div class="people__lanes">
+      @for (card of audienceCards; track card.audience) {
+        <article>
+          <span>{{ card.audience }}</span>
+          <h3>{{ card.line }}</h3>
+          <p>{{ card.detail }}</p>
+        </article>
       }
-    </ol>
+    </div>
+  </section>
+
+  <section class="trust" id="trust" aria-labelledby="trust-title">
+    <div class="trust__header">
+      <span class="section-label">Trust made simple</span>
+      <h2 id="trust-title">Say what matters to schools. Hide the engineering.</h2>
+      <p>Security and structure are important, but the public page should describe what the user receives: privacy, clarity, and confidence.</p>
+    </div>
+
+    <div class="trust__grid">
+      @for (point of trustPoints; track point) {
+        <span>{{ point }}</span>
+      }
+    </div>
+  </section>
+
+  <section class="next" aria-labelledby="next-title">
+    <div>
+      <span class="section-label">Product growth</span>
+      <h2 id="next-title">Next, turn daily records into decisions.</h2>
+    </div>
+
+    <ul>
+      @for (move of nextMoves; track move) {
+        <li>{{ move }}</li>
+      }
+    </ul>
+  </section>
+
+  <section class="final-cta" aria-labelledby="final-title">
+    <span class="section-label">Ready to begin</span>
+    <h2 id="final-title">Bring the first school workspace online.</h2>
+    @if (currentUser()) {
+      <a class="solid-action solid-action--large" href="/dashboard">Open dashboard</a>
+    } @else {
+      <a class="solid-action solid-action--large" href="/register">Create workspace</a>
+    }
   </section>
 </main>
