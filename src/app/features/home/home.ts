@@ -13,40 +13,55 @@ export class Home implements OnInit {
 
   protected readonly currentUser = this.authService.currentUser;
 
-  protected readonly sidebarItems = [
-    { code: 'HM', label: 'Home', active: true },
-    { code: 'AD', label: 'Admissions', active: false },
-    { code: 'AC', label: 'Academics', active: false },
-    { code: 'AT', label: 'Attendance', active: false },
-    { code: 'FN', label: 'Finance', active: false },
-    { code: 'RP', label: 'Reports', active: false },
-    { code: 'ST', label: 'Settings', active: false }
+  protected readonly pageIndex = [
+    { number: '01', label: 'Start', href: '#start' },
+    { number: '02', label: 'Dayboard', href: '#dayboard' },
+    { number: '03', label: 'Security', href: '#security' },
+    { number: '04', label: 'Build Path', href: '#build-path' }
   ];
 
-  protected readonly modules = [
+  protected readonly moduleStations = [
+    { time: '08:00', title: 'School Profile', tone: 'foundation', description: 'Institution identity, academic year, timezone, status.' },
+    { time: '08:30', title: 'Students', tone: 'students', description: 'Real student records with class assignment support.' },
+    { time: '09:00', title: 'Staff', tone: 'staff', description: 'Employee records, roles, and update workflows.' },
+    { time: '09:30', title: 'Classes', tone: 'classes', description: 'Class sections and optional teacher ownership.' },
+    { time: '10:00', title: 'Attendance', tone: 'attendance', description: 'Daily marking from actual class rosters.' },
+    { time: 'Next', title: 'Reports', tone: 'reports', description: 'Attendance summaries, histories, and exports.' }
+  ];
+
+  protected readonly visitorPaths = [
     {
-      title: 'Admissions',
-      description: 'Build controlled student intake workflows with validation, review, and approval steps.'
+      label: 'For a visitor',
+      title: 'Understand the product before entering the workspace.',
+      detail: 'The public site explains what SchoolSys does, where security lives, and which modules are already active.'
     },
     {
-      title: 'Academics',
-      description: 'Organize classes, subjects, timetables, exams, and academic records from one workspace.'
+      label: 'For an admin',
+      title: 'Move directly into protected daily work.',
+      detail: 'Authenticated users can jump from the intro into the dashboard without seeing demo records or fake counters.'
     },
     {
-      title: 'Attendance',
-      description: 'Prepare daily attendance operations with role-based access and auditable updates.'
-    },
-    {
-      title: 'Finance',
-      description: 'Manage fee structures, payments, receipts, and follow-up workflows securely.'
+      label: 'For development',
+      title: 'Add features without tangling the whole product.',
+      detail: 'Each school domain keeps its own backend service layer, Angular service, component, and SCSS surface.'
     }
   ];
 
-  protected readonly setupSteps = [
-    'Create the first administrator account',
-    'Configure school profile and academic year',
-    'Add roles for staff access',
-    'Start adding real school records'
+  protected readonly securityLedger = [
+    { label: 'Session', value: 'HttpOnly cookies only' },
+    { label: 'Access JWT', value: '15 minute lifetime' },
+    { label: 'Refresh JWT', value: '7 day rotation' },
+    { label: 'Stolen token catch', value: 'Database hash verification' },
+    { label: 'Resource access', value: 'Server-side ownership checks' },
+    { label: 'Input boundary', value: 'Validated request DTOs' }
+  ];
+
+  protected readonly buildSteps = [
+    'Create the administrator workspace',
+    'Complete the school profile',
+    'Add students, staff, and classes',
+    'Run class attendance from real rosters',
+    'Expand reports and export workflows'
   ];
 
   ngOnInit(): void {

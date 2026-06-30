@@ -1,103 +1,133 @@
-<main class="app-shell">
-  <aside class="sidebar" aria-label="Main navigation">
-    <a class="brand" href="/home" aria-label="SchoolSys home">
-      <span class="brand__mark">S</span>
-      <span>
-        <strong>SchoolSys</strong>
-        <small>Secure School Platform</small>
-      </span>
-    </a>
-
-    <nav class="sidebar__nav">
-      @for (item of sidebarItems; track item.label) {
-        <a class="sidebar-link" [class.sidebar-link--active]="item.active" href="/home">
-          <span>{{ item.code }}</span>
-          <strong>{{ item.label }}</strong>
+<main class="schoolsys-intro">
+  <aside class="site-index" aria-label="Page index">
+    <a class="index-brand" href="/home" aria-label="SchoolSys home">S</a>
+    <nav>
+      @for (item of pageIndex; track item.number) {
+        <a [href]="item.href">
+          <span>{{ item.number }}</span>
+          {{ item.label }}
         </a>
       }
     </nav>
   </aside>
 
-  <section class="workspace">
-    <header class="navbar">
-      <div class="navbar__title">
-        <span class="eyebrow">Public Home</span>
-        <h1>SchoolSys</h1>
-      </div>
+  <section class="hero" id="start" aria-labelledby="hero-title">
+    <video class="hero__video" autoplay muted loop playsinline poster="/assets/visitor/school-hero-poster.jpg">
+      <source src="/assets/visitor/school-hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__fallback" aria-hidden="true"></div>
+    <div class="hero__wash" aria-hidden="true"></div>
 
-      <label class="search-box" aria-label="Search platform modules">
-        <span aria-hidden="true"></span>
-        <input type="search" placeholder="Search modules">
-      </label>
+    <header class="topline">
+      <a class="wordmark" href="/home">
+        <strong>SchoolSys</strong>
+        <span>School operations, secured</span>
+      </a>
 
-      <div class="navbar__actions">
+      <div class="topline__actions">
         @if (currentUser()) {
-          <a class="primary-action primary-action--compact" href="/dashboard">Dashboard</a>
-          <button class="ghost-action" type="button" (click)="logout()">Logout</button>
+          <a class="text-link" href="/dashboard">Dashboard</a>
+          <button class="solid-link" type="button" (click)="logout()">Logout</button>
         } @else {
-          <a class="ghost-action" href="/login">Login</a>
-          <a class="primary-action primary-action--compact" href="/register">Register</a>
+          <a class="text-link" href="/login">Login</a>
+          <a class="solid-link" href="/register">Register</a>
         }
       </div>
     </header>
 
-    <section class="welcome-panel" aria-labelledby="welcome-title">
-      <div>
-        <span class="eyebrow">Secure school management</span>
-        <h2 id="welcome-title">Start with a clean workspace.</h2>
-        <p>Manage admissions, academics, attendance, finance, reports, and staff access once your real school data is connected.</p>
+    <div class="hero__content">
+      <div class="hero__copy">
+        <p class="section-code">Visitor introduction</p>
+        <h1 id="hero-title">School days, organized before the bell rings.</h1>
+        <p>
+          A public introduction for visitors, and a secure operating workspace for administrators managing real school records.
+        </p>
+
+        <div class="hero__actions">
+          @if (currentUser()) {
+            <a class="solid-link solid-link--large" href="/dashboard">Open workspace</a>
+          } @else {
+            <a class="solid-link solid-link--large" href="/register">Create workspace</a>
+            <a class="outline-link" href="#dayboard">Explore the dayboard</a>
+          }
+        </div>
       </div>
 
-      <div class="hero-actions">
-        @if (currentUser()) {
-          <a class="primary-action" href="/dashboard">Open dashboard</a>
-        } @else {
-          <a class="primary-action" href="/register">Create account</a>
-          <a class="secondary-action" href="/login">Sign in</a>
-        }
+      <div class="day-snapshot" aria-label="SchoolSys day snapshot">
+        <div class="snapshot__header">
+          <span>Today</span>
+          <strong>Operations board</strong>
+        </div>
+        <div class="snapshot__grid">
+          <span class="snapshot__tile snapshot__tile--profile">Profile</span>
+          <span class="snapshot__tile snapshot__tile--students">Students</span>
+          <span class="snapshot__tile snapshot__tile--classes">Classes</span>
+          <span class="snapshot__tile snapshot__tile--attendance">Attendance</span>
+        </div>
+        <div class="snapshot__route">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="summary-grid" aria-label="Platform modules">
-      @for (module of modules; track module.title) {
-        <article class="summary-card">
-          <span>{{ module.title }}</span>
-          <p>{{ module.description }}</p>
+  <section class="visitor-paths" aria-label="Visitor paths">
+    @for (path of visitorPaths; track path.label) {
+      <article>
+        <span>{{ path.label }}</span>
+        <h2>{{ path.title }}</h2>
+        <p>{{ path.detail }}</p>
+      </article>
+    }
+  </section>
+
+  <section class="dayboard" id="dayboard" aria-labelledby="dayboard-title">
+    <div class="section-heading section-heading--wide">
+      <p class="section-code">Module dayboard</p>
+      <h2 id="dayboard-title">The workspace is mapped like a school day.</h2>
+      <p>Instead of showing fake dashboard numbers, the intro presents the real modules as stations in the daily operating flow.</p>
+    </div>
+
+    <div class="station-board">
+      @for (station of moduleStations; track station.title) {
+        <article [class]="'station station--' + station.tone">
+          <span>{{ station.time }}</span>
+          <h3>{{ station.title }}</h3>
+          <p>{{ station.description }}</p>
         </article>
       }
-    </section>
+    </div>
+  </section>
 
-    <section class="content-grid">
-      <article class="panel">
-        <div class="panel__header">
-          <div>
-            <span class="eyebrow">Workspace setup</span>
-            <h2>Before records appear</h2>
-          </div>
+  <section class="security-ledger" id="security" aria-labelledby="security-title">
+    <div class="ledger-intro">
+      <p class="section-code">Security ledger</p>
+      <h2 id="security-title">The login system is treated like infrastructure.</h2>
+      <p>Visitor pages stay public. Operational data sits behind authenticated routes, short-lived tokens, refresh rotation, and database-backed token checks.</p>
+    </div>
+
+    <div class="ledger-table" role="list">
+      @for (row of securityLedger; track row.label) {
+        <div role="listitem">
+          <span>{{ row.label }}</span>
+          <strong>{{ row.value }}</strong>
         </div>
+      }
+    </div>
+  </section>
 
-        <ul class="setup-list">
-          @for (step of setupSteps; track step) {
-            <li>{{ step }}</li>
-          }
-        </ul>
-      </article>
+  <section class="build-path" id="build-path" aria-labelledby="build-title">
+    <div>
+      <p class="section-code">Build path</p>
+      <h2 id="build-title">What the product should grow into next.</h2>
+    </div>
 
-      <article class="panel empty-panel">
-        <div class="panel__header">
-          <div>
-            <span class="eyebrow">Live data</span>
-            <h2>No records loaded</h2>
-          </div>
-        </div>
-
-        <p>Your dashboard activity, counts, alerts, and reports will appear here only after real backend data is available.</p>
-        @if (currentUser()) {
-          <a class="secondary-action" href="/dashboard">Continue setup</a>
-        } @else {
-          <a class="secondary-action" href="/register">Set up workspace</a>
-        }
-      </article>
-    </section>
+    <ol>
+      @for (step of buildSteps; track step) {
+        <li>{{ step }}</li>
+      }
+    </ol>
   </section>
 </main>
