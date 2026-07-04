@@ -1,43 +1,38 @@
-<main class="auth-page">
-  <section class="auth-visual" aria-label="School management platform">
-    <a class="brand" routerLink="/login" aria-label="School Management home">
+<main class="auth-page auth-page--login">
+  <header class="auth-header">
+    <a class="brand" routerLink="/home" aria-label="SchoolSys home">
       <span class="brand__mark">S</span>
       <span>
         <strong>SchoolSys</strong>
-        <small>Secure campus management</small>
+        <small>School operations workspace</small>
       </span>
     </a>
 
-    <div class="auth-visual__content">
-      <span class="eyebrow">Welcome back</span>
-      <h1>Manage your school with clarity, control, and confidence.</h1>
-      <p>Access admissions, attendance, staff, classes, finance, and parent communication from one protected workspace.</p>
-    </div>
+    <a class="header-link" routerLink="/home">Public site</a>
+  </header>
 
-    <div class="auth-stats" aria-label="Platform highlights">
-      <span>Role-based access</span>
-      <span>Protected student data</span>
-      <span>Fast daily workflows</span>
-    </div>
-  </section>
-
-  <section class="auth-panel" aria-labelledby="login-title">
-    <div class="auth-card">
+  <section class="auth-shell auth-shell--login" aria-labelledby="login-title">
+    <article class="auth-card auth-card--compact">
       <div class="auth-card__header">
         <span class="eyebrow">Login</span>
-        <h2 id="login-title">Sign in to your account</h2>
-        <p>Use your registered email and password to continue.</p>
+        <h1 id="login-title">Sign in to SchoolSys</h1>
+        <p>Continue to your school workspace.</p>
       </div>
 
       <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="submit()">
         <label class="field">
           <span>Email address</span>
-          <input type="email" formControlName="email" autocomplete="email" placeholder="Enter your email">
+          <input type="email" formControlName="email" autocomplete="email" placeholder="name@school.edu">
         </label>
 
         <label class="field">
           <span>Password</span>
-          <input type="password" formControlName="password" autocomplete="current-password" placeholder="Enter password">
+          <span class="password-field">
+            <input [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="current-password" placeholder="Enter password">
+            <button type="button" (click)="togglePasswordVisibility()" [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+              {{ showPassword() ? 'Hide' : 'Show' }}
+            </button>
+          </span>
         </label>
 
         <div class="form-row">
@@ -59,8 +54,24 @@
 
       <p class="auth-switch">
         New to SchoolSys?
-        <a routerLink="/register">Create an account</a>
+        <a routerLink="/register">Create workspace</a>
       </p>
-    </div>
+    </article>
+
+    <aside class="auth-assist" aria-label="Workspace access help">
+      <span>Workspace access</span>
+      <strong>Use the email invited by your school administrator.</strong>
+      <div class="workspace-cue">
+        <small>Workspace format</small>
+        <code>school-code.schoolsys.app</code>
+      </div>
+      <p>Workspace discovery can be added next for schools with a dedicated subdomain.</p>
+    </aside>
   </section>
+
+  <footer class="auth-footer">
+    <span>Protected sign-in</span>
+    <a routerLink="/home">Home</a>
+    <a href="#">Privacy</a>
+  </footer>
 </main>

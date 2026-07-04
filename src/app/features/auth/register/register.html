@@ -1,80 +1,97 @@
-<main class="auth-page">
-  <section class="auth-visual" aria-label="School management platform">
-    <a class="brand" routerLink="/login" aria-label="School Management home">
+<main class="auth-page auth-page--register">
+  <header class="auth-header">
+    <a class="brand" routerLink="/home" aria-label="SchoolSys home">
       <span class="brand__mark">S</span>
       <span>
         <strong>SchoolSys</strong>
-        <small>Secure campus management</small>
+        <small>School operations workspace</small>
       </span>
     </a>
 
-    <div class="auth-visual__content">
-      <span class="eyebrow">Get started</span>
-      <h1>Create a protected workspace for your school.</h1>
-      <p>Set up the first administrator account with a secure cookie session and strong password protection.</p>
-    </div>
+    <a class="header-link" routerLink="/login">Already registered?</a>
+  </header>
 
-    <div class="auth-stats" aria-label="Platform highlights">
-      <span>HttpOnly cookies</span>
-      <span>Strong passwords</span>
-      <span>Protected sessions</span>
-    </div>
-  </section>
+  <section class="auth-shell auth-shell--register" aria-labelledby="register-title">
+    <aside class="setup-panel" aria-label="Workspace setup overview">
+      <span class="eyebrow">Workspace setup</span>
+      <h1>Create your SchoolSys workspace.</h1>
+      <p>Start with one administrator account. Add school details, records, classes, and attendance after sign in.</p>
 
-  <section class="auth-panel" aria-labelledby="register-title">
-    <div class="auth-card">
+      <ol class="setup-list">
+        <li><span>01</span><strong>Admin account</strong></li>
+        <li><span>02</span><strong>School profile</strong></li>
+        <li><span>03</span><strong>Students and staff</strong></li>
+      </ol>
+
+      <div class="workspace-cue workspace-cue--dark">
+        <small>Workspace format</small>
+        <code>school-code.schoolsys.app</code>
+      </div>
+    </aside>
+
+    <article class="auth-card auth-card--register">
       <div class="auth-card__header">
         <span class="eyebrow">Register</span>
-        <h2 id="register-title">Create your account</h2>
-        <p>Use a school email and a strong password to protect administrator access.</p>
+        <h1 id="register-title">Create workspace</h1>
+        <p>Set up the administrator account.</p>
       </div>
 
-      <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="submit()">
-        <label class="field">
+      <form class="auth-form auth-form--register" [formGroup]="registerForm" (ngSubmit)="submit()">
+        <label class="field field--wide">
           <span>Full name</span>
           <input type="text" formControlName="fullName" autocomplete="name" placeholder="Enter your full name">
         </label>
 
-        <label class="field">
+        <label class="field field--wide">
           <span>School email</span>
-          <input type="email" formControlName="email" autocomplete="email" placeholder="Enter your email">
+          <input type="email" formControlName="email" autocomplete="email" placeholder="name@school.edu">
         </label>
 
         <label class="field">
           <span>Password</span>
-          <input type="password" formControlName="password" autocomplete="new-password" placeholder="Create password">
+          <span class="password-field">
+            <input [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password" placeholder="Create password">
+            <button type="button" (click)="togglePasswordVisibility()" [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+              {{ showPassword() ? 'Hide' : 'Show' }}
+            </button>
+          </span>
         </label>
 
-        <div class="password-meter" [class.password-meter--good]="passwordScore() >= 4" [class.password-meter--strong]="passwordScore() === 5">
+        <label class="field">
+          <span>Confirm password</span>
+          <span class="password-field">
+            <input [type]="showConfirmPassword() ? 'text' : 'password'" formControlName="confirmPassword" autocomplete="new-password" placeholder="Confirm password">
+            <button type="button" (click)="toggleConfirmPasswordVisibility()" [attr.aria-label]="showConfirmPassword() ? 'Hide password' : 'Show password'">
+              {{ showConfirmPassword() ? 'Hide' : 'Show' }}
+            </button>
+          </span>
+        </label>
+
+        <div class="password-meter field--wide" [class.password-meter--good]="passwordScore() >= 4" [class.password-meter--strong]="passwordScore() === 5">
           <div class="password-meter__track">
             <span></span>
           </div>
           <strong>{{ passwordStrength() }}</strong>
         </div>
 
-        <ul class="password-rules" aria-label="Password requirements">
-          <li>At least 10 characters</li>
+        <ul class="password-rules field--wide" aria-label="Password requirements">
+          <li>10+ characters</li>
           <li>Uppercase and lowercase letters</li>
           <li>At least one number</li>
           <li>At least one special character</li>
         </ul>
 
-        <label class="field">
-          <span>Confirm password</span>
-          <input type="password" formControlName="confirmPassword" autocomplete="new-password" placeholder="Confirm password">
-        </label>
-
-        <label class="check-field">
+        <label class="check-field check-field--terms field--wide">
           <input type="checkbox" name="terms">
           <span>I agree to the terms and privacy policy</span>
         </label>
 
         @if (errorMessage()) {
-          <p class="form-error">{{ errorMessage() }}</p>
+          <p class="form-error field--wide">{{ errorMessage() }}</p>
         }
 
-        <button class="primary-action auth-submit" type="submit" [disabled]="isSubmitting()">
-          {{ isSubmitting() ? 'Creating account...' : 'Create account' }}
+        <button class="primary-action auth-submit field--wide" type="submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Creating workspace...' : 'Create workspace' }}
         </button>
       </form>
 
@@ -82,6 +99,12 @@
         Already registered?
         <a routerLink="/login">Sign in</a>
       </p>
-    </div>
+    </article>
   </section>
+
+  <footer class="auth-footer">
+    <span>Protected registration</span>
+    <a routerLink="/home">Home</a>
+    <a href="#">Privacy</a>
+  </footer>
 </main>

@@ -21,8 +21,8 @@
   <section class="dashboard-workspace">
     <header class="dashboard-navbar">
       <div>
-        <span class="eyebrow">Protected Dashboard</span>
-        <h1>Workspace</h1>
+        <span class="eyebrow">School workspace</span>
+        <h1>Daily operations</h1>
       </div>
 
       <div class="user-panel">
@@ -39,10 +39,10 @@
 
     <section class="welcome-panel">
       <div>
-        <span class="eyebrow">Authenticated session</span>
+        <span class="eyebrow">Start here</span>
         @if (currentUser(); as user) {
           <h2>Welcome, {{ user.fullName }}.</h2>
-          <p>Your secure workspace is ready. Start by saving the institution profile, then connect real school records module by module.</p>
+          <p>Set up the school profile, add real records, then run classes and attendance from one workspace.</p>
         }
       </div>
       <a class="primary-action" href="#school-profile">Start school setup</a>

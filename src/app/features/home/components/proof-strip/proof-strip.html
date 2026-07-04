@@ -1,0 +1,8 @@
+<section class="proof-strip" aria-label="Product proof points">
+  @for (item of items; track item.label) {
+    <span>
+      <strong>{{ item.value }}</strong>
+      <em>{{ item.label }}</em>
+    </span>
+  }
+</section>

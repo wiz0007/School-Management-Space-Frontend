@@ -1,0 +1,263 @@
+:host {
+  display: block;
+}
+
+.role-routes {
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 0.42fr) minmax(30rem, 1fr);
+  margin-inline: auto;
+  max-width: 1400px;
+  padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3rem);
+}
+
+.section-label {
+  color: #254f67;
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.role-routes__copy {
+  align-self: center;
+
+  h2 {
+    color: #10130f;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 2.65vw, 3.05rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.08;
+    margin: 0.75rem 0 1rem;
+    max-width: 12ch;
+  }
+
+  p {
+    color: #6d665d;
+    font-size: clamp(0.96rem, 1.05vw, 1.05rem);
+    line-height: 1.62;
+    margin-bottom: 1.55rem;
+    max-width: 28rem;
+  }
+}
+
+.solid-action {
+  align-items: center;
+  background: #10130f;
+  border-radius: 16px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: clamp(0.86rem, 0.9vw, 0.94rem);
+  font-weight: 700;
+  justify-content: center;
+  min-height: 3.05rem;
+  padding: 0 1.25rem;
+  transition: background-color 180ms ease, transform 180ms ease;
+
+  &:hover {
+    background: #254f67;
+    transform: translateY(-2px);
+  }
+}
+
+.access-map {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(13rem, 0.45fr) minmax(0, 1fr);
+}
+
+.access-map__panel {
+  align-content: end;
+  background: #254f67;
+  border-radius: 28px;
+  box-shadow: 0 28px 70px rgba(16, 19, 15, 0.18);
+  color: #ffffff;
+  display: grid;
+  min-height: 34rem;
+  overflow: hidden;
+  padding: 1.2rem;
+  position: relative;
+
+  &::before,
+  &::after {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    content: '';
+    position: absolute;
+  }
+
+  &::before {
+    height: 18rem;
+    right: -7rem;
+    top: 3rem;
+    width: 18rem;
+  }
+
+  &::after {
+    bottom: -4rem;
+    height: 13rem;
+    left: -5rem;
+    width: 13rem;
+  }
+
+  span {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  strong {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 2.8vw, 3.2rem);
+    font-weight: 650;
+    line-height: 0.95;
+  }
+
+  em {
+    color: rgba(255, 255, 255, 0.72);
+    font-style: normal;
+    font-weight: 650;
+  }
+}
+
+.role-routes__list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.role-routes__list a {
+  align-items: center;
+  background: #fff8eb;
+  border: 1px solid rgba(16, 19, 15, 0.16);
+  border-radius: 22px;
+  color: #10130f;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 3.5rem 6rem minmax(0, 1fr) auto;
+  min-height: 7.7rem;
+  padding: 1rem 1.1rem;
+  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+
+  small {
+    color: rgba(16, 19, 15, 0.32);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 650;
+  }
+
+  span {
+    color: #b85d49;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  strong {
+    color: #10130f;
+    font-family: var(--font-display);
+    font-size: clamp(1.02rem, 1.18vw, 1.2rem);
+    font-weight: 650;
+    line-height: 1.22;
+  }
+
+  em {
+    color: #254f67;
+    font-style: normal;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background: #ffffff;
+    box-shadow: 0 24px 54px rgba(16, 19, 15, 0.12);
+    transform: translateX(6px);
+  }
+}
+
+@media (max-width: 1160px) {
+  .role-routes,
+  .access-map {
+    grid-template-columns: 1fr;
+  }
+
+  .access-map__panel {
+    min-height: 20rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .role-routes__copy h2 {
+    font-size: clamp(1.8rem, 7vw, 2.55rem);
+  }
+
+  .role-routes__list a {
+    grid-template-columns: 1fr;
+  }
+
+  .role-routes__list a em {
+    white-space: normal;
+  }
+}
+/* Final product-site typography calibration */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.role-routes__copy h2 {
+  font-size: clamp(1.85rem, 2.25vw, 2.65rem);
+  font-weight: 620;
+  line-height: 1.14;
+  max-width: 15ch;
+}
+
+.role-routes__copy p {
+  font-size: clamp(0.94rem, 1vw, 1.02rem);
+  font-weight: 430;
+  line-height: 1.58;
+}
+
+.solid-action,
+.role-routes__list a em {
+  font-size: 0.84rem;
+  font-weight: 650;
+}
+
+.access-map__panel span,
+.role-routes__list a span {
+  font-size: 0.68rem;
+  font-weight: 650;
+}
+
+.access-map__panel strong {
+  font-size: clamp(1.85rem, 2.4vw, 2.8rem);
+  font-weight: 620;
+}
+
+.role-routes__list a small {
+  font-size: 0.92rem;
+  font-weight: 620;
+}
+
+.role-routes__list a strong {
+  font-size: clamp(0.98rem, 1.1vw, 1.12rem);
+  font-weight: 650;
+  line-height: 1.24;
+}
+/* Product wording type fit */
+h2,
+.command-flow__copy h2,
+.product-desks__intro h2,
+.role-routes__copy h2 {
+  font-weight: 560;
+  line-height: 1.18;
+}
+
+p,
+.command-flow__copy p,
+.product-desks p,
+.role-routes__copy p {
+  font-weight: 400;
+}

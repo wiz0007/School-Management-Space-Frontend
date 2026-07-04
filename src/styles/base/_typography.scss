@@ -9,21 +9,73 @@ h1,
 h2,
 h3 {
   color: var(--text);
-  font-weight: 760;
-  line-height: 1.05;
+  font-family: var(--font-display);
+  font-weight: 850;
   letter-spacing: 0;
+  line-height: 1.08;
 }
 
 p {
   color: var(--muted);
-  line-height: 1.7;
+  font-family: var(--font-sans);
+  line-height: 1.65;
 }
 
-.eyebrow {
+.eyebrow,
+.section-label {
   color: var(--teal);
   display: inline-flex;
   font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-weight: 900;
+  letter-spacing: 0;
   text-transform: uppercase;
+}
+/* Product-wide type calibration */
+h1 {
+  font-size: clamp(2.4rem, 4vw, 4.9rem);
+  font-weight: 760;
+  line-height: 1.12;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 3.4rem);
+  font-weight: 760;
+  line-height: 1.14;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+  font-weight: 740;
+  line-height: 1.2;
+}
+
+p {
+  font-size: clamp(0.96rem, 1.05vw, 1.05rem);
+  font-weight: 500;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+/* Product-font correction: avoid rounded poster typography */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 620;
+  line-height: 1.16;
+}
+
+p {
+  font-weight: 400;
+}
+
+.eyebrow,
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
 }

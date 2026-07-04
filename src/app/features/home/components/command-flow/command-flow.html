@@ -1,0 +1,54 @@
+<section class="command-flow" id="command" aria-labelledby="command-title">
+  <div class="command-flow__copy">
+    <span class="section-label">Command flow</span>
+    <h2 id="command-title">One launch path for the whole school day.</h2>
+    <p>Start the workspace, bring records in, shape classes, then open today without jumping through disconnected screens.</p>
+    <div class="command-flow__actions">
+      <a class="solid-action" href="/register">Start the flow</a>
+      <a class="text-action" href="#modules">See desks</a>
+    </div>
+  </div>
+
+  <div class="command-flow__stage" aria-label="SchoolSys command preview">
+    <div class="workspace-panel">
+      <div class="workspace-panel__top">
+        <span></span>
+        <span></span>
+        <span></span>
+        <strong>Today</strong>
+      </div>
+      <div class="workspace-panel__body">
+        <nav aria-label="Preview modules">
+          @for (item of consoleItems; track item) {
+            <span>{{ item }}</span>
+          }
+        </nav>
+        <div class="workspace-panel__screen">
+          <div class="screen-card screen-card--wide">
+            <small>Launch queue</small>
+            <strong>04 active moves</strong>
+          </div>
+          <div class="screen-card">
+            <small>Records</small>
+            <strong>Ready</strong>
+          </div>
+          <div class="screen-card">
+            <small>Attendance</small>
+            <strong>Live</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="command-steps">
+      @for (step of steps; track step.number) {
+        <a class="command-step" href="/register">
+          <span>{{ step.number }}</span>
+          <small>{{ step.label }}</small>
+          <strong>{{ step.title }}</strong>
+          <em>{{ step.action }}</em>
+        </a>
+      }
+    </div>
+  </div>
+</section>

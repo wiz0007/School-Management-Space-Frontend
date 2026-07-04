@@ -1,0 +1,357 @@
+:host {
+  display: block;
+}
+
+.command-flow {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(18rem, 0.42fr) minmax(0, 1fr);
+  margin-inline: auto;
+  max-width: 1400px;
+  padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3rem);
+  position: relative;
+
+  &::before {
+    background: rgba(16, 19, 15, 0.1);
+    content: '';
+    height: 1px;
+    left: clamp(1rem, 4vw, 3rem);
+    position: absolute;
+    right: clamp(1rem, 4vw, 3rem);
+    top: 0;
+  }
+}
+
+.section-label {
+  color: #254f67;
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.command-flow__copy {
+  align-self: center;
+
+  h2 {
+    color: #10130f;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 2.65vw, 3.05rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.08;
+    margin: 0.75rem 0 1rem;
+    max-width: 11ch;
+  }
+
+  p {
+    color: #6d665d;
+    font-size: clamp(0.96rem, 1.05vw, 1.05rem);
+    line-height: 1.62;
+    max-width: 28rem;
+  }
+}
+
+.command-flow__actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.55rem;
+}
+
+.solid-action,
+.text-action {
+  align-items: center;
+  border-radius: 16px;
+  display: inline-flex;
+  font-size: clamp(0.86rem, 0.9vw, 0.94rem);
+  font-weight: 700;
+  min-height: 3.05rem;
+  padding: 0 1.25rem;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.solid-action {
+  background: #10130f;
+  color: #ffffff;
+
+  &:hover {
+    background: #254f67;
+    transform: translateY(-2px);
+  }
+}
+
+.text-action {
+  color: #10130f;
+  padding-inline: 0;
+
+  &:hover {
+    transform: translateX(4px);
+  }
+}
+
+.command-flow__stage {
+  min-height: 42rem;
+  position: relative;
+}
+
+.workspace-panel {
+  background: #10130f;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  box-shadow: 0 34px 90px rgba(16, 19, 15, 0.22);
+  color: #ffffff;
+  inset: 0 0 auto 7%;
+  min-height: 31rem;
+  overflow: hidden;
+  position: absolute;
+  transform: rotate(-1deg);
+}
+
+.workspace-panel__top {
+  align-items: center;
+  background: rgba(255, 248, 235, 0.08);
+  display: flex;
+  gap: 0.55rem;
+  min-height: 4rem;
+  padding: 0 1.1rem;
+
+  span {
+    aspect-ratio: 1;
+    background: #fff8eb;
+    border-radius: 999px;
+    opacity: 0.85;
+    width: 0.72rem;
+  }
+
+  strong {
+    font-size: 0.86rem;
+    margin-left: auto;
+    opacity: 0.72;
+  }
+}
+
+.workspace-panel__body {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 11rem 1fr;
+  padding: 1rem;
+
+  nav {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  nav span {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.86rem;
+    font-weight: 650;
+    padding: 0.9rem;
+
+    &:first-child,
+    &:last-child {
+      background: #fff8eb;
+      color: #10130f;
+    }
+  }
+}
+
+.workspace-panel__screen {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.screen-card {
+  align-content: end;
+  background: #fff8eb;
+  border-radius: 20px;
+  color: #10130f;
+  display: grid;
+  min-height: 10rem;
+  padding: 1rem;
+
+  small {
+    color: #6d665d;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.02rem, 1.18vw, 1.2rem);
+    line-height: 1.08;
+  }
+}
+
+.screen-card--wide {
+  background: #dbe5e8;
+  grid-column: 1 / -1;
+  min-height: 12rem;
+}
+
+.command-steps {
+  bottom: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.command-step {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 248, 235, 0.88);
+  border: 1px solid rgba(16, 19, 15, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 22px 55px rgba(16, 19, 15, 0.14);
+  color: #10130f;
+  display: grid;
+  min-height: 14rem;
+  padding: 1rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+
+  span {
+    color: rgba(16, 19, 15, 0.28);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2vw, 2.2rem);
+    font-weight: 650;
+    line-height: 0.9;
+  }
+
+  small {
+    color: #b85d49;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  strong {
+    align-self: end;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.35vw, 1.35rem);
+    font-weight: 650;
+    line-height: 1.16;
+  }
+
+  em {
+    color: #254f67;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  &:nth-child(even) {
+    transform: translateY(2.2rem);
+  }
+
+  &:hover {
+    box-shadow: 0 30px 70px rgba(16, 19, 15, 0.2);
+    transform: translateY(-0.35rem);
+  }
+}
+
+@media (max-width: 1160px) {
+  .command-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .command-flow__copy h2 {
+    max-width: 15ch;
+  }
+}
+
+@media (max-width: 760px) {
+  .command-flow__stage {
+    min-height: auto;
+  }
+
+  .workspace-panel,
+  .command-steps {
+    inset: auto;
+    position: relative;
+    transform: none;
+  }
+
+  .workspace-panel__body {
+    grid-template-columns: 1fr;
+  }
+
+  .command-steps {
+    grid-template-columns: 1fr;
+    margin-top: 1rem;
+  }
+
+  .command-step:nth-child(even) {
+    transform: none;
+  }
+}
+/* Final product-site typography calibration */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.command-flow__copy h2 {
+  font-size: clamp(1.85rem, 2.25vw, 2.65rem);
+  font-weight: 620;
+  line-height: 1.14;
+  max-width: 15ch;
+}
+
+.command-flow__copy p {
+  font-size: clamp(0.94rem, 1vw, 1.02rem);
+  font-weight: 430;
+  line-height: 1.58;
+  max-width: 29rem;
+}
+
+.solid-action,
+.text-action {
+  font-size: 0.84rem;
+  font-weight: 650;
+  min-height: 2.85rem;
+}
+
+.workspace-panel__top strong,
+.workspace-panel__body nav span,
+.screen-card small,
+.command-step small,
+.command-step em {
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.screen-card strong {
+  font-size: clamp(1rem, 1.2vw, 1.22rem);
+  font-weight: 650;
+}
+
+.command-step span {
+  font-size: clamp(1.25rem, 1.55vw, 1.75rem);
+  font-weight: 620;
+}
+
+.command-step strong {
+  font-size: clamp(0.98rem, 1.1vw, 1.12rem);
+  font-weight: 650;
+  line-height: 1.22;
+}
+/* Product wording type fit */
+h2,
+.command-flow__copy h2,
+.product-desks__intro h2,
+.role-routes__copy h2 {
+  font-weight: 560;
+  line-height: 1.18;
+}
+
+p,
+.command-flow__copy p,
+.product-desks p,
+.role-routes__copy p {
+  font-weight: 400;
+}

@@ -1,0 +1,27 @@
+<section class="role-routes" id="roles" aria-labelledby="roles-title">
+  <div class="role-routes__copy">
+    <span class="section-label">Role routes</span>
+    <h2 id="roles-title">Every user enters through the right door.</h2>
+    <p>SchoolSys keeps the path short: office teams move records, teachers run the day, admins keep control.</p>
+    <a class="solid-action" href="/register">Create workspace</a>
+  </div>
+
+  <div class="access-map" aria-label="Role access preview">
+    <div class="access-map__panel">
+      <span>Access map</span>
+      <strong>Admin</strong>
+      <em>Full workspace control</em>
+    </div>
+
+    <div class="role-routes__list">
+      @for (route of routes; track route.role) {
+        <a href="/register">
+          <small>{{ route.code }}</small>
+          <span>{{ route.role }}</span>
+          <strong>{{ route.title }}</strong>
+          <em>{{ route.action }}</em>
+        </a>
+      }
+    </div>
+  </div>
+</section>

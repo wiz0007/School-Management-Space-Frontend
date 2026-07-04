@@ -261,3 +261,167 @@
     grid-template-columns: 1fr;
   }
 }
+/* Product architecture alignment */
+.dashboard-shell {
+  background: #f3ecdc;
+}
+
+.sidebar {
+  background: #11130f;
+}
+
+.brand__mark {
+  background: #f3ecdc;
+  border-radius: 0;
+  color: #11130f;
+}
+
+.sidebar-link {
+  border-radius: 0;
+}
+
+.dashboard-navbar,
+.welcome-panel,
+.identity-grid article {
+  background: #fbf7ec;
+  border-color: rgba(17, 19, 15, 0.15);
+  border-radius: 0;
+  box-shadow: 0 18px 40px rgba(17, 19, 15, 0.06);
+}
+
+.avatar {
+  background: #dce9d8;
+  border-radius: 0;
+  color: #0c6a59;
+}
+
+.primary-action,
+.ghost-action {
+  border-radius: 0;
+}
+
+.primary-action {
+  background: #11130f;
+  border-color: #11130f;
+}
+
+.primary-action:hover {
+  background: #0c6a59;
+  border-color: #0c6a59;
+}
+
+.ghost-action {
+  background: #fbf7ec;
+  border-color: rgba(17, 19, 15, 0.15);
+}
+
+.ghost-action:hover {
+  border-color: #0c6a59;
+  color: #0c6a59;
+}
+/* Commercial font/color calibration */
+.dashboard-shell {
+  background: #f4f8fb;
+  color: #14233f;
+  font-family: var(--font-sans);
+}
+
+.sidebar {
+  background: #14233f;
+}
+
+.dashboard-navbar,
+.welcome-panel,
+.identity-grid article {
+  background: #ffffff;
+  border-color: #dce6ee;
+  border-radius: 16px;
+}
+
+.primary-action {
+  background: #19a76f;
+  border-color: #19a76f;
+}
+
+.primary-action:hover {
+  background: #12845a;
+  border-color: #12845a;
+}
+
+.avatar {
+  background: #eef8f3;
+  color: #19a76f;
+}
+/* Warm SchoolSys palette restore */
+.dashboard-shell {
+  background: #f3ecdc;
+  color: #10130f;
+}
+
+.sidebar {
+  background: #10130f;
+}
+
+.dashboard-navbar,
+.welcome-panel,
+.identity-grid article {
+  background: #fff8eb;
+  border-color: #ded2be;
+}
+
+.primary-action {
+  background: #10130f;
+  border-color: #10130f;
+}
+
+.primary-action:hover {
+  background: #254f67;
+  border-color: #254f67;
+}
+
+.avatar {
+  background: #dce8d7;
+  color: #254f67;
+}
+/* Softer SchoolSys controls */
+.brand__mark,
+.sidebar-link,
+.dashboard-navbar,
+.welcome-panel,
+.identity-grid article,
+.avatar,
+.primary-action,
+.ghost-action {
+  border-radius: 14px;
+}
+/* Product typography system upgrade */
+.dashboard-navbar h1 {
+  font-size: clamp(1.8rem, 2.4vw, 2.35rem);
+  font-weight: 760;
+  line-height: 1.15;
+}
+
+.welcome-panel h2 {
+  font-size: clamp(1.85rem, 2.8vw, 2.7rem);
+  font-weight: 760;
+  line-height: 1.15;
+}
+
+.welcome-panel p,
+.user-panel small,
+.identity-grid span {
+  font-size: 0.96rem;
+  line-height: 1.58;
+}
+
+.primary-action,
+.ghost-action,
+.sidebar-link strong {
+  font-size: 0.96rem;
+  font-weight: 820;
+}
+
+.identity-grid strong,
+.user-panel strong {
+  font-weight: 760;
+}

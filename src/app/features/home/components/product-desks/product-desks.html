@@ -1,0 +1,30 @@
+<section class="product-desks" id="modules" aria-labelledby="modules-title">
+  <div class="product-desks__intro">
+    <span class="section-label">Product desks</span>
+    <h2 id="modules-title">A workspace that looks like the school actually works.</h2>
+    <a class="outline-action" href="/register">Create workspace</a>
+  </div>
+
+  <div class="desk-ticker" aria-hidden="true">
+    <div>
+      @for (item of tickerItems; track item) {
+        <span>{{ item }}</span>
+      }
+      @for (item of tickerItems; track item + '-copy') {
+        <span>{{ item }}</span>
+      }
+    </div>
+  </div>
+
+  <div class="product-desks__grid">
+    @for (module of modules; track module.name) {
+      <article [class]="'desk-card desk-card--' + module.tone + ' desk-card--' + module.size">
+        <div>
+          <span>{{ module.name }}</span>
+          <p>{{ module.detail }}</p>
+        </div>
+        <a href="/register">{{ module.action }}</a>
+      </article>
+    }
+  </div>
+</section>
